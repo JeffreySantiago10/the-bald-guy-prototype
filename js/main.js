@@ -11,21 +11,32 @@
    * CONFIG — editable prototype values
    * ------------------------------------------------------------------- */
   var CONFIG = {
-    FREE_SHIPPING_THRESHOLD: 40, // EUR — fictional, for prototype only
+    FREE_SHIPPING_MIN_QTY: 3, // bottles — matches the 3-bottle tier's free-shipping perk
     CURRENCY: '€',
     PRODUCT: {
       id: 'clean-01',
       name: '01 CLEAN',
-      variant: 'Daily Scalp Cleanser · 200ml',
-      priceOneTime: 24.95,
-      priceSubscribe: 22.45
+      variant: 'Daily Scalp Cleanser · 250ml',
+      // Quantity-based pricing only — no subscription option.
+      tiers: [
+        { qty: 1, unit: 24.95, total: 24.95 },
+        { qty: 2, unit: 23.95, total: 47.90, save: 2.00 },
+        { qty: 3, unit: 21.95, total: 65.85, save: 9.00, freeShipping: true }
+      ]
     },
     EMAIL_POPUP_SCROLL_PERCENT: 0.45,
     EMAIL_POPUP_DELAY_MS: 30000
   };
 
   var money = function (n) {
-    return CONFIG.CURRENCY + n.toFixed(2).replace('.', ',');
+    return CONFIG.CURRENCY + n.toFixed(2);
+  };
+
+  var tierByQty = function (qty) {
+    for (var i = 0; i < CONFIG.PRODUCT.tiers.length; i++) {
+      if (CONFIG.PRODUCT.tiers[i].qty === qty) return CONFIG.PRODUCT.tiers[i];
+    }
+    return CONFIG.PRODUCT.tiers[0];
   };
 
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -139,7 +150,7 @@
    * ------------------------------------------------------------------- */
   var Cart = (function () {
     var STORAGE_KEY = 'tbg_cart_v1';
-    var state = { qty: 0, plan: null };
+    var state = { qty: 0, unitPrice: 0 };
 
     function load() {
       try {
@@ -150,12 +161,12 @@
     function persist() {
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
     }
-    function unitPrice() {
-      return state.plan === 'subscribe' ? CONFIG.PRODUCT.priceSubscribe : CONFIG.PRODUCT.priceOneTime;
-    }
-    function add(qty, plan) {
-      state.qty += qty;
-      state.plan = plan;
+    // Selecting a quantity tier sets the cart line directly (it replaces
+    // any previous selection) rather than accumulating across clicks —
+    // there's only one product, so "Add to Cart" means "this is my order".
+    function set(qty, unitPrice) {
+      state.qty = qty;
+      state.unitPrice = unitPrice;
       persist();
       render();
     }
@@ -165,7 +176,7 @@
       render();
     }
     function clear() {
-      state = { qty: 0, plan: null };
+      state = { qty: 0, unitPrice: 0 };
       persist();
       render();
     }
@@ -192,15 +203,16 @@
       }
 
       foot.hidden = false;
-      var lineTotal = unitPrice() * count;
-      var planLabel = state.plan === 'subscribe' ? 'Subscribe & Save · Every 4 weeks' : 'One-Time Purchase';
+      var unit = state.unitPrice;
+      var lineTotal = unit * count;
+      var variantLabel = count + ' × ' + money(unit) + ' each';
 
       body.innerHTML =
         '<div class="cart-line">' +
         '<div class="cart-line__visual" aria-hidden="true">' + bottleMarkup() + '</div>' +
         '<div>' +
         '<p class="cart-line__name">' + CONFIG.PRODUCT.name + '</p>' +
-        '<p class="cart-line__variant">' + planLabel + '</p>' +
+        '<p class="cart-line__variant">' + variantLabel + '</p>' +
         '<div class="cart-line__controls">' +
         '<div class="qty-stepper qty-stepper--sm">' +
         '<button type="button" data-cart-decrease aria-label="Decrease quantity">−</button>' +
@@ -218,9 +230,9 @@
 
       var shipNote = qs('[data-cart-shipping-note]');
       if (shipNote) {
-        var remaining = CONFIG.FREE_SHIPPING_THRESHOLD - lineTotal;
-        shipNote.textContent = remaining > 0
-          ? 'Add ' + money(remaining) + ' more for free shipping'
+        var remainingQty = CONFIG.FREE_SHIPPING_MIN_QTY - count;
+        shipNote.textContent = remainingQty > 0
+          ? 'Add ' + remainingQty + ' more bottle' + (remainingQty > 1 ? 's' : '') + ' for free shipping'
           : 'You’ve unlocked free shipping';
       }
 
@@ -239,7 +251,7 @@
     }
 
     load();
-    return { add: add, setQty: setQty, clear: clear, render: render, get state() { return state; } };
+    return { set: set, setQty: setQty, clear: clear, render: render, get state() { return state; } };
   })();
 
   /* ---------------------------------------------------------------------
@@ -291,53 +303,34 @@
    * Product purchase selector (homepage product section)
    * ------------------------------------------------------------------- */
   qsa('[data-product-form]').forEach(function (form) {
-    var priceEl = qs('[data-price-display]', form);
     var atcBtn = qs('[data-add-to-cart]', form);
-    var qtyInput = qs('[data-qty-input]', form);
-    var freqWrap = qs('[data-freq-wrap]', form);
-    var options = qsa('.purchase-option', form);
+    var totalEl = qs('[data-tier-total]', form);
+    var tierCards = qsa('.tier-card', form);
 
-    function currentPlan() {
-      var checked = qs('input[name="plan"]:checked', form);
-      return checked ? checked.value : 'onetime';
+    function currentTier() {
+      var checked = qs('input[name="qty-tier"]:checked', form);
+      return tierByQty(checked ? parseInt(checked.value, 10) : 1);
     }
-    function unitPrice(plan) {
-      return plan === 'subscribe' ? CONFIG.PRODUCT.priceSubscribe : CONFIG.PRODUCT.priceOneTime;
-    }
-    function updatePrice() {
-      var plan = currentPlan();
-      var qty = parseInt(qtyInput.value, 10) || 1;
-      var total = unitPrice(plan) * qty;
-      if (priceEl) priceEl.textContent = 'Add to Cart — ' + money(total);
-      options.forEach(function (opt) {
-        var input = qs('input[name="plan"]', opt);
-        opt.classList.toggle('is-selected', input.checked);
+    function updateSelection() {
+      var tier = currentTier();
+      if (totalEl) totalEl.textContent = money(tier.total);
+      tierCards.forEach(function (card) {
+        var input = qs('input[name="qty-tier"]', card);
+        card.classList.toggle('is-selected', input.checked);
       });
-      if (freqWrap) freqWrap.hidden = plan !== 'subscribe';
     }
 
-    qsa('input[name="plan"]', form).forEach(function (input) {
-      input.addEventListener('change', updatePrice);
-    });
-
-    var qtyInc = qs('[data-qty-increase]', form);
-    var qtyDec = qs('[data-qty-decrease]', form);
-    if (qtyInc) qtyInc.addEventListener('click', function () {
-      qtyInput.value = (parseInt(qtyInput.value, 10) || 1) + 1;
-      updatePrice();
-    });
-    if (qtyDec) qtyDec.addEventListener('click', function () {
-      qtyInput.value = Math.max(1, (parseInt(qtyInput.value, 10) || 1) - 1);
-      updatePrice();
+    qsa('input[name="qty-tier"]', form).forEach(function (input) {
+      input.addEventListener('change', updateSelection);
     });
 
     if (atcBtn) atcBtn.addEventListener('click', function () {
-      var qty = parseInt(qtyInput.value, 10) || 1;
-      Cart.add(qty, currentPlan());
+      var tier = currentTier();
+      Cart.set(tier.qty, tier.unit);
       CartDrawer.open();
     });
 
-    updatePrice();
+    updateSelection();
   });
 
   /* ---------------------------------------------------------------------
@@ -357,9 +350,9 @@
     var stickyBtn = qs('[data-sticky-add-to-cart]', sticky);
     if (stickyBtn) stickyBtn.addEventListener('click', function () {
       var form = qs('[data-product-form]');
-      var qty = form ? (parseInt(qs('[data-qty-input]', form).value, 10) || 1) : 1;
-      var plan = form ? (qs('input[name="plan"]:checked', form) || {}).value || 'onetime' : 'onetime';
-      Cart.add(qty, plan);
+      var checked = form && qs('input[name="qty-tier"]:checked', form);
+      var tier = tierByQty(checked ? parseInt(checked.value, 10) : 1);
+      Cart.set(tier.qty, tier.unit);
       CartDrawer.open();
     });
   })();

@@ -92,18 +92,8 @@
         </div>
       </div>
       <div class="hero__visual" data-reveal>
-        <div class="product-visual">
-          <div class="bottle">
-            <div class="bottle__pump"></div>
-            <div class="bottle__neck"></div>
-            <div class="bottle__body">
-              <div class="bottle__label">
-                <span class="bottle__label-num">01</span>
-                <span class="bottle__label-name">Clean</span>
-                <span class="bottle__label-sub">Daily Scalp Cleanser</span>
-              </div>
-            </div>
-          </div>
+        <div class="hero__media media-frame">
+          <img src="assets/images/product-hero.png" alt="The Bald Guy 01 Clean daily scalp cleanser pump bottle standing on a shower ledge, surrounded by warm light, running water and foam" width="1672" height="941" fetchpriority="high" />
         </div>
       </div>
     </div>
@@ -114,18 +104,19 @@
        ====================================================================== -->
   <section class="section section--alt" id="why">
     <div class="container problem__layout">
-      <div data-reveal>
+      <div class="problem__copy" data-reveal>
         <span class="eyebrow">Recognition</span>
         <h2 class="section-head" style="margin-bottom:0">No hair.<br>Still skin.</h2>
-      </div>
-      <div data-reveal>
-        <p class="lede" style="max-width:52ch">A bald head is exposed skin. Sweat, oil and everyday buildup still collect on it &mdash; the same way they do on your face.</p>
+        <p class="lede" style="max-width:52ch; margin-top: var(--space-md)">A bald head is exposed skin. Sweat, oil and everyday buildup still collect on it &mdash; the same way they do on your face.</p>
         <p class="lede" style="max-width:52ch; margin-top: var(--space-sm)">Yet most bald guys just use whatever happens to be in the shower.</p>
         <div class="problem__tags">
           <span class="tag">Sweat</span>
           <span class="tag">Oil</span>
           <span class="tag">Daily Buildup</span>
         </div>
+      </div>
+      <div class="problem__media media-frame" data-reveal>
+        <img src="assets/images/product-wet.png" alt="A hand holding The Bald Guy daily scalp cleanser under running shower water" loading="lazy" decoding="async" width="1536" height="1024" />
       </div>
     </div>
   </section>
@@ -157,77 +148,72 @@
        ====================================================================== -->
   <section class="section" id="shop">
     <div class="container product-section__layout">
-      <div class="hero__visual" data-reveal>
-        <div class="product-visual">
-          <div class="bottle" style="--bottle-scale:1.1">
-            <div class="bottle__pump"></div>
-            <div class="bottle__neck"></div>
-            <div class="bottle__body">
-              <div class="bottle__label">
-                <span class="bottle__label-num">01</span>
-                <span class="bottle__label-name">Clean</span>
-                <span class="bottle__label-sub">Daily Scalp Cleanser</span>
-              </div>
-            </div>
-          </div>
-          <p class="visual-caption">200ml &middot; Placeholder mockup</p>
-        </div>
+      <div class="product-shot media-frame" data-reveal>
+        <img src="assets/images/product-pump-detail.png" alt="Close-up of the matte black pump dispenser on The Bald Guy daily scalp cleanser bottle" loading="lazy" decoding="async" width="1671" height="941" />
       </div>
 
       <div data-reveal>
         <p class="product-card__kicker">01</p>
         <h2 class="h2 product-card__name">Clean</h2>
         <p class="product-card__type">Daily Scalp Cleanser</p>
-        <p class="lede" style="margin-top: var(--space-sm)">Daily cleansing for the skin on your head.</p>
+        <p class="lede" style="margin-top: var(--space-sm)">Daily scalp care made for bald guys.</p>
+        <p class="product-card__price" data-price-static>€24.95</p>
 
         <ul class="benefit-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg> Built for scalp skin, not hair</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg> Clears daily sweat, oil &amp; buildup</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg> One step. No routine required</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg> Cleanses sweat, oil and daily buildup</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg> Made for daily scalp care</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg> Fresh, clean skin feel</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg> With Niacinamide, Aloe Vera, Glycerin &amp; Panthenol</li>
         </ul>
 
         <form class="product-form" data-product-form>
-          <p class="product-card__price" data-price-static>€24.95</p>
+          <span class="eyebrow" style="display:block; margin-top: var(--space-lg);">Choose Your Routine</span>
 
-          <div class="purchase-options" role="radiogroup" aria-label="Purchase option">
-            <label class="purchase-option is-selected">
-              <input type="radio" name="plan" value="onetime" checked />
-              <span class="purchase-option__radio" aria-hidden="true"></span>
-              <span class="purchase-option__label">One-Time Purchase</span>
-              <span class="purchase-option__price">€24.95</span>
+          <div class="tier-select" role="radiogroup" aria-label="Quantity">
+            <label class="tier-card is-selected">
+              <input type="radio" name="qty-tier" value="1" checked />
+              <span class="tier-card__radio" aria-hidden="true"></span>
+              <span class="tier-card__main">
+                <span class="tier-card__label">1 Bottle</span>
+                <span class="tier-card__unit">€24.95 / bottle</span>
+              </span>
+              <span class="tier-card__price">€24.95</span>
             </label>
-            <label class="purchase-option">
-              <input type="radio" name="plan" value="subscribe" />
-              <span class="purchase-option__radio" aria-hidden="true"></span>
-              <span class="purchase-option__label">Subscribe &amp; Save 10% <span class="purchase-option__badge">-10%</span></span>
-              <span class="purchase-option__price">€22.45</span>
+
+            <label class="tier-card">
+              <input type="radio" name="qty-tier" value="2" />
+              <span class="tier-card__radio" aria-hidden="true"></span>
+              <span class="tier-card__main">
+                <span class="tier-card__label">2 Bottles</span>
+                <span class="tier-card__unit">€23.95 / bottle <span class="tier-card__save">Save €2</span></span>
+              </span>
+              <span class="tier-card__price">€47.90</span>
             </label>
-            <div class="purchase-option__freq" data-freq-wrap hidden>
-              <label class="sr-only" for="freq-select">Delivery frequency</label>
-              <select id="freq-select" name="frequency">
-                <option value="4">Every 4 weeks</option>
-                <option value="6">Every 6 weeks</option>
-                <option value="8">Every 8 weeks</option>
-              </select>
-            </div>
+
+            <label class="tier-card">
+              <input type="radio" name="qty-tier" value="3" />
+              <span class="tier-card__radio" aria-hidden="true"></span>
+              <span class="tier-card__main">
+                <span class="tier-card__label">3 Bottles <span class="tier-card__badge">Best Value</span></span>
+                <span class="tier-card__unit">€21.95 / bottle <span class="tier-card__save">Save €9</span></span>
+                <span class="tier-card__shipping">Free shipping</span>
+              </span>
+              <span class="tier-card__price">€65.85</span>
+            </label>
           </div>
 
-          <div class="purchase-row">
-            <div class="qty-stepper">
-              <button type="button" data-qty-decrease aria-label="Decrease quantity">&minus;</button>
-              <input type="text" inputmode="numeric" value="1" data-qty-input aria-label="Quantity" readonly />
-              <button type="button" data-qty-increase aria-label="Increase quantity">+</button>
-            </div>
-            <button type="button" class="btn btn--primary add-to-cart" data-add-to-cart>
-              <span data-price-display>Add to Cart — €24.95</span>
-            </button>
+          <div class="tier-selected-total">
+            <span class="tier-selected-total__label">Total</span>
+            <span class="tier-selected-total__price" data-tier-total>€24.95</span>
           </div>
+
+          <button type="button" class="btn btn--primary btn--block add-to-cart" data-add-to-cart>Add to Cart</button>
         </form>
 
         <div class="trust-row">
           <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="14" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6"/><circle cx="7" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg> Ships from the Netherlands</span>
           <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Secure checkout via Shopify</span>
-          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l6 6L21 6"/></svg> Cancel or edit subscription anytime</span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l6 6L21 6"/></svg> Free shipping on 3 bottles</span>
         </div>
       </div>
     </div>
@@ -237,12 +223,15 @@
        WHY THE BALD GUY EXISTS
        ====================================================================== -->
   <section class="section section--alt">
-    <div class="container" style="max-width:900px">
+    <div class="container story__layout">
       <div data-reveal>
         <span class="eyebrow">Our Reason</span>
         <h2 class="h2" style="margin-top:var(--space-sm)">Bald heads have been an afterthought for too long.</h2>
         <p class="lede" style="max-width:60ch; margin-top:var(--space-md)">There are thousands of products for hair. And thousands for faces. But when the hair disappears, most guys are left using whatever happens to be in the shower.</p>
         <p class="lede" style="max-width:60ch; margin-top:var(--space-sm)">We&rsquo;re changing that &mdash; scalp care built around bald guys.</p>
+      </div>
+      <div class="story__media media-frame" data-reveal>
+        <img src="assets/images/product-hand.png" alt="A soap-covered hand holding The Bald Guy daily scalp cleanser bottle at the bathroom sink" loading="lazy" decoding="async" width="1672" height="941" />
       </div>
     </div>
   </section>
@@ -343,35 +332,45 @@
       <div class="section-head" data-reveal>
         <span class="eyebrow">The Formula</span>
         <h2 class="h2">What&rsquo;s inside?</h2>
-        <p class="text-muted">Our formula is currently being finalized. Here&rsquo;s the structure of what you&rsquo;ll find on the bottle.</p>
+        <p class="text-muted">Cleanses the scalp &mdash; with a few ingredients doing extra work.</p>
       </div>
-      <div class="ingredient-list" data-reveal>
-        <div class="ingredient-row">
-          <span class="ingredient-row__name">Ingredient 01</span>
-          <span class="ingredient-row__status">To be confirmed</span>
+
+      <div class="formula__media media-frame" data-reveal>
+        <img src="assets/images/product-texture.png" alt="A smear of The Bald Guy scalp cleanser gel texture with light foam, shown on a stone surface" loading="lazy" decoding="async" width="1670" height="941" />
+      </div>
+
+      <div class="grid grid--2" data-reveal style="margin-top: var(--space-xl)">
+        <div class="benefit-block">
+          <h3>Niacinamide</h3>
+          <p class="text-muted">Supports the skin barrier and helps maintain balanced-looking skin.</p>
         </div>
-        <div class="ingredient-row">
-          <span class="ingredient-row__name">Ingredient 02</span>
-          <span class="ingredient-row__status">To be confirmed</span>
+        <div class="benefit-block">
+          <h3>Glycerin</h3>
+          <p class="text-muted">Helps attract and retain moisture.</p>
         </div>
-        <div class="ingredient-row">
-          <span class="ingredient-row__name">Ingredient 03</span>
-          <span class="ingredient-row__status">To be confirmed</span>
+        <div class="benefit-block">
+          <h3>Aloe Vera</h3>
+          <p class="text-muted">Helps provide a comfortable, refreshed skin feel.</p>
+        </div>
+        <div class="benefit-block">
+          <h3>Panthenol</h3>
+          <p class="text-muted">Known for its conditioning and soothing properties.</p>
         </div>
       </div>
+
+      <p class="text-muted" style="margin-top: var(--space-lg); font-size: var(--fs-xs)">Current test formulation. Final ingredients may change before launch.</p>
 
       <div class="ingredient-full" data-reveal>
         <div class="accordion">
           <h3>
             <button type="button" class="accordion__header" aria-expanded="false" aria-controls="panel-ingredients" id="acc-ingredients">
-              View full ingredient list
+              Full ingredient list
               <span class="accordion__icon" aria-hidden="true"></span>
             </button>
           </h3>
           <div class="accordion__panel" id="panel-ingredients" role="region" aria-labelledby="acc-ingredients">
             <div class="accordion__panel-inner">
-              <p>The full INCI list will be published here once the final formulation is confirmed.</p>
-              <p>[Final ingredient list to be added]</p>
+              <p>Aqua, Sodium Laureth Sulfate, Niacinamide, Cocamidopropyl Betaine, Acrylates/C10-30 Alkyl Acrylate Crosspolymer, Triethanolamine, Sodium Cocoamphoacetate, Parfum, Sodium Chloride, Glycerin, Aloe Barbadensis Leaf Extract, Panthenol, Citric Acid, Pyrus Cydonia Seed Extract, Phenoxyethanol, Ethylhexylglycerin, Potassium Sorbate, Sodium Benzoate, Citrus Aurantium Peel Oil, Limonene, Linalool, Hexyl Cinnamal.</p>
             </div>
           </div>
         </div>
@@ -430,11 +429,11 @@
         </div>
         <div class="accordion">
           <h3><button type="button" class="accordion__header" aria-expanded="false" aria-controls="faq-6" id="faq-h-6">Does it have a fragrance?<span class="accordion__icon" aria-hidden="true"></span></button></h3>
-          <div class="accordion__panel" id="faq-6" role="region" aria-labelledby="faq-h-6"><div class="accordion__panel-inner"><p><em>[Placeholder — fragrance information will be confirmed with the final formula.]</em></p></div></div>
+          <div class="accordion__panel" id="faq-6" role="region" aria-labelledby="faq-h-6"><div class="accordion__panel-inner"><p>Yes, the current test formula includes a light fragrance (Parfum). <em>[The final scent profile may change before launch.]</em></p></div></div>
         </div>
         <div class="accordion">
-          <h3><button type="button" class="accordion__header" aria-expanded="false" aria-controls="faq-7" id="faq-h-7">Can I subscribe?<span class="accordion__icon" aria-hidden="true"></span></button></h3>
-          <div class="accordion__panel" id="faq-7" role="region" aria-labelledby="faq-h-7"><div class="accordion__panel-inner"><p>Yes. Choose Subscribe &amp; Save at checkout for 10% off and flexible delivery every 4, 6 or 8 weeks. Cancel or edit anytime.</p></div></div>
+          <h3><button type="button" class="accordion__header" aria-expanded="false" aria-controls="faq-7" id="faq-h-7">Can I buy more than one bottle?<span class="accordion__icon" aria-hidden="true"></span></button></h3>
+          <div class="accordion__panel" id="faq-7" role="region" aria-labelledby="faq-h-7"><div class="accordion__panel-inner"><p>Yes. Choose 2 or 3 bottles at checkout for a lower price per bottle &mdash; 3 bottles also ships free.</p></div></div>
         </div>
         <div class="accordion">
           <h3><button type="button" class="accordion__header" aria-expanded="false" aria-controls="faq-8" id="faq-h-8">Do you ship outside the Netherlands?<span class="accordion__icon" aria-hidden="true"></span></button></h3>
