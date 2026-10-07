@@ -158,6 +158,7 @@
         <p class="product-card__type">Daily Scalp Cleanser</p>
         <p class="lede" style="margin-top: var(--space-sm)">Daily scalp care made for bald guys.</p>
         <p class="product-card__price" data-price-static>€24.95</p>
+        <p class="product-card__value-note">200 ml · Up to 200 washes · &asymp; €0.12 per wash*</p>
 
         <ul class="benefit-list">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg> Cleanses sweat, oil and daily buildup</li>
@@ -170,8 +171,8 @@
           <span class="eyebrow" style="display:block; margin-top: var(--space-lg);">Choose Your Routine</span>
 
           <div class="tier-select" role="radiogroup" aria-label="Quantity">
-            <label class="tier-card is-selected">
-              <input type="radio" name="qty-tier" value="1" checked />
+            <label class="tier-card">
+              <input type="radio" name="qty-tier" value="1" />
               <span class="tier-card__radio" aria-hidden="true"></span>
               <span class="tier-card__main">
                 <span class="tier-card__label">1 Bottle</span>
@@ -180,14 +181,18 @@
               <span class="tier-card__price">€24.95</span>
             </label>
 
-            <label class="tier-card">
-              <input type="radio" name="qty-tier" value="2" />
+            <label class="tier-card tier-card--featured is-selected">
+              <input type="radio" name="qty-tier" value="2" checked />
               <span class="tier-card__radio" aria-hidden="true"></span>
               <span class="tier-card__main">
-                <span class="tier-card__label">2 Bottles</span>
-                <span class="tier-card__unit">€23.95 / bottle <span class="tier-card__save">Save €2</span></span>
+                <span class="tier-card__label">2 Bottles <span class="tier-card__badge">Most Popular</span></span>
+                <span class="tier-card__unit">€22.48 / bottle</span>
+                <span class="tier-card__perks">
+                  <span class="tier-card__perk">Free Scalp Cleansing Brush</span>
+                  <span class="tier-card__perk">Free Shipping</span>
+                </span>
               </span>
-              <span class="tier-card__price">€47.90</span>
+              <span class="tier-card__price">€44.95</span>
             </label>
 
             <label class="tier-card">
@@ -195,17 +200,21 @@
               <span class="tier-card__radio" aria-hidden="true"></span>
               <span class="tier-card__main">
                 <span class="tier-card__label">3 Bottles <span class="tier-card__badge">Best Value</span></span>
-                <span class="tier-card__unit">€21.95 / bottle <span class="tier-card__save">Save €9</span></span>
-                <span class="tier-card__shipping">Free shipping</span>
+                <span class="tier-card__unit">€21.65 / bottle</span>
+                <span class="tier-card__perks">
+                  <span class="tier-card__perk">Free Scalp Cleansing Brush</span>
+                  <span class="tier-card__perk">Free Shipping</span>
+                </span>
               </span>
-              <span class="tier-card__price">€65.85</span>
+              <span class="tier-card__price">€64.95</span>
             </label>
           </div>
 
           <div class="tier-selected-total">
             <span class="tier-selected-total__label">Total</span>
-            <span class="tier-selected-total__price" data-tier-total>€24.95</span>
+            <span class="tier-selected-total__price" data-tier-total>€44.95</span>
           </div>
+          <p class="tier-selected-perks" data-tier-perks>Free Scalp Cleansing Brush · Free Shipping</p>
 
           <button type="button" class="btn btn--primary btn--block add-to-cart" data-add-to-cart>Add to Cart</button>
         </form>
@@ -213,8 +222,36 @@
         <div class="trust-row">
           <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="14" height="10" rx="1"/><path d="M16 10h3l3 3v4h-6"/><circle cx="7" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg> Ships from the Netherlands</span>
           <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Secure checkout via Shopify</span>
-          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l6 6L21 6"/></svg> Free shipping on 3 bottles</span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l6 6L21 6"/></svg> Free brush &amp; shipping on 2+ bottles</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       BRUSH / CLEAN ROUTINE OFFER
+       ====================================================================== -->
+  <section class="section" id="brush">
+    <div class="container brush__layout">
+      <div data-reveal>
+        <span class="eyebrow">The Clean Routine</span>
+        <h2 class="h2" style="margin-top:var(--space-sm)">Cleaner scalp.<br>Better routine.</h2>
+        <p class="lede" style="max-width:50ch; margin-top:var(--space-md)">Use 01 CLEAN with the Scalp Cleansing Brush to work the cleanser across the scalp and help lift sweat, oil and everyday buildup.</p>
+
+        <div class="offer-panel">
+          <p class="offer-panel__eyebrow">Free Scalp Cleansing Brush</p>
+          <h3 class="offer-panel__title">With 2+ Bottles</h3>
+          <p class="offer-panel__copy">Buy 2 or more bottles of 01 CLEAN and we&rsquo;ll include a Scalp Cleansing Brush with your order.</p>
+          <p class="offer-panel__perk">Free shipping included.</p>
+          <a href="#shop" class="btn btn--primary" style="margin-top:var(--space-md)">Shop The Clean Routine</a>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <div class="brush__media media-frame">
+          <img src="assets/images/product-brush.png" alt="A man massaging The Bald Guy Scalp Cleansing Brush with foaming cleanser into his bald scalp" loading="lazy" decoding="async" width="1254" height="1254" />
+        </div>
+        <p class="media-caption">01 Clean + Scalp Cleansing Brush</p>
       </div>
     </div>
   </section>
@@ -379,6 +416,43 @@
   </section>
 
   <!-- ======================================================================
+       VALUE — cost per wash
+       Assumption: 1 pump ≈ 1ml, 200ml bottle, one pump per wash. Not yet
+       confirmed against the final production pump — update the figures
+       below (and the matching value-note in the PRODUCT section) if the
+       confirmed dosage changes.
+       ====================================================================== -->
+  <section class="section section--dark">
+    <div class="container text-center" data-reveal>
+      <span class="eyebrow" style="color:var(--color-on-dark-muted)">Cost Per Wash</span>
+      <h2 class="h2" style="margin-top:var(--space-sm)">One bottle.<br>Up to 200 washes.</h2>
+      <p class="lede" style="color:var(--color-on-dark-muted); margin-inline:auto; margin-top:var(--space-sm)">One pump. One daily wash.<br>A 200&nbsp;ml bottle can last more than six months.*</p>
+    </div>
+
+    <div class="container grid grid--3 value-stats" data-reveal>
+      <div class="value-stat">
+        <p class="value-stat__top">1 Pump</p>
+        <p class="value-stat__eq">&asymp;</p>
+        <p class="value-stat__bottom">1 ml</p>
+      </div>
+      <div class="value-stat">
+        <p class="value-stat__top">200 ml</p>
+        <p class="value-stat__eq">&asymp;</p>
+        <p class="value-stat__bottom">200 washes</p>
+      </div>
+      <div class="value-stat">
+        <p class="value-stat__top">€24.95</p>
+        <p class="value-stat__eq">&asymp;</p>
+        <p class="value-stat__bottom">€0.12 / wash</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <p class="value-footnote text-muted" data-reveal>*Based on approximately 1 ml per pump and one pump per wash. Actual usage may vary.</p>
+    </div>
+  </section>
+
+  <!-- ======================================================================
        SOCIAL PROOF
        ====================================================================== -->
   <section class="section">
@@ -425,7 +499,7 @@
         </div>
         <div class="accordion">
           <h3><button type="button" class="accordion__header" aria-expanded="false" aria-controls="faq-5" id="faq-h-5">How long does one bottle last?<span class="accordion__icon" aria-hidden="true"></span></button></h3>
-          <div class="accordion__panel" id="faq-5" role="region" aria-labelledby="faq-h-5"><div class="accordion__panel-inner"><p><em>[Placeholder — estimated bottle life will be added once packaging and dosage are finalized.]</em></p></div></div>
+          <div class="accordion__panel" id="faq-5" role="region" aria-labelledby="faq-h-5"><div class="accordion__panel-inner"><p>Based on one pump per wash, a 200&nbsp;ml bottle is good for up to 200 washes &mdash; more than six months of daily use. <em>[Final figure to be confirmed once production pump dosage is set.]</em></p></div></div>
         </div>
         <div class="accordion">
           <h3><button type="button" class="accordion__header" aria-expanded="false" aria-controls="faq-6" id="faq-h-6">Does it have a fragrance?<span class="accordion__icon" aria-hidden="true"></span></button></h3>
@@ -433,7 +507,7 @@
         </div>
         <div class="accordion">
           <h3><button type="button" class="accordion__header" aria-expanded="false" aria-controls="faq-7" id="faq-h-7">Can I buy more than one bottle?<span class="accordion__icon" aria-hidden="true"></span></button></h3>
-          <div class="accordion__panel" id="faq-7" role="region" aria-labelledby="faq-h-7"><div class="accordion__panel-inner"><p>Yes. Choose 2 or 3 bottles at checkout for a lower price per bottle &mdash; 3 bottles also ships free.</p></div></div>
+          <div class="accordion__panel" id="faq-7" role="region" aria-labelledby="faq-h-7"><div class="accordion__panel-inner"><p>Yes. Choose 2 or 3 bottles for a lower price per bottle. Both options include a free Scalp Cleansing Brush and free shipping.</p></div></div>
         </div>
         <div class="accordion">
           <h3><button type="button" class="accordion__header" aria-expanded="false" aria-controls="faq-8" id="faq-h-8">Do you ship outside the Netherlands?<span class="accordion__icon" aria-hidden="true"></span></button></h3>

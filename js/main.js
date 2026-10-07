@@ -11,17 +11,19 @@
    * CONFIG — editable prototype values
    * ------------------------------------------------------------------- */
   var CONFIG = {
-    FREE_SHIPPING_MIN_QTY: 3, // bottles — matches the 3-bottle tier's free-shipping perk
+    FREE_PERKS_MIN_QTY: 2, // bottles — threshold for both the free brush and free shipping
     CURRENCY: '€',
     PRODUCT: {
       id: 'clean-01',
       name: '01 CLEAN',
-      variant: 'Daily Scalp Cleanser · 250ml',
-      // Quantity-based pricing only — no subscription option.
+      variant: 'Daily Scalp Cleanser · 200ml',
+      // Quantity-based pricing only — no subscription option. "total" is the
+      // fixed bundle price (never recompute as unit * qty — tiers 2 and 3
+      // are flat offer prices, not per-bottle multiples).
       tiers: [
         { qty: 1, unit: 24.95, total: 24.95 },
-        { qty: 2, unit: 23.95, total: 47.90, save: 2.00 },
-        { qty: 3, unit: 21.95, total: 65.85, save: 9.00, freeShipping: true }
+        { qty: 2, unit: 22.48, total: 44.95, freeShipping: true, freeBrush: true },
+        { qty: 3, unit: 21.65, total: 64.95, freeShipping: true, freeBrush: true }
       ]
     },
     EMAIL_POPUP_SCROLL_PERCENT: 0.45,
@@ -149,8 +151,8 @@
    * Cart state
    * ------------------------------------------------------------------- */
   var Cart = (function () {
-    var STORAGE_KEY = 'tbg_cart_v1';
-    var state = { qty: 0, unitPrice: 0 };
+    var STORAGE_KEY = 'tbg_cart_v2';
+    var state = { qty: 0, unit: 0, total: 0 };
 
     function load() {
       try {
@@ -164,19 +166,30 @@
     // Selecting a quantity tier sets the cart line directly (it replaces
     // any previous selection) rather than accumulating across clicks —
     // there's only one product, so "Add to Cart" means "this is my order".
-    function set(qty, unitPrice) {
+    // `total` is the tier's fixed bundle price — never unit * qty, since
+    // the 2- and 3-bottle tiers are flat offer prices, not per-bottle math.
+    function set(qty, unit, total) {
       state.qty = qty;
-      state.unitPrice = unitPrice;
+      state.unit = unit;
+      state.total = total;
       persist();
       render();
     }
+    // The in-drawer qty stepper only ever lands on a defined tier (1–3) —
+    // there's no bundle price defined beyond 3, so it clamps there instead
+    // of guessing at a per-bottle rate.
     function setQty(qty) {
-      state.qty = Math.max(0, qty);
+      var clamped = Math.max(0, Math.min(3, qty));
+      if (clamped === 0) { clear(); return; }
+      var tier = tierByQty(clamped);
+      state.qty = tier.qty;
+      state.unit = tier.unit;
+      state.total = tier.total;
       persist();
       render();
     }
     function clear() {
-      state = { qty: 0, unitPrice: 0 };
+      state = { qty: 0, unit: 0, total: 0 };
       persist();
       render();
     }
@@ -203,9 +216,8 @@
       }
 
       foot.hidden = false;
-      var unit = state.unitPrice;
-      var lineTotal = unit * count;
-      var variantLabel = count + ' × ' + money(unit) + ' each';
+      var lineTotal = state.total;
+      var variantLabel = count + ' × ' + money(state.unit) + ' each';
 
       body.innerHTML =
         '<div class="cart-line">' +
@@ -230,10 +242,9 @@
 
       var shipNote = qs('[data-cart-shipping-note]');
       if (shipNote) {
-        var remainingQty = CONFIG.FREE_SHIPPING_MIN_QTY - count;
-        shipNote.textContent = remainingQty > 0
-          ? 'Add ' + remainingQty + ' more bottle' + (remainingQty > 1 ? 's' : '') + ' for free shipping'
-          : 'You’ve unlocked free shipping';
+        var qualifies = count >= CONFIG.FREE_PERKS_MIN_QTY;
+        shipNote.hidden = !qualifies;
+        shipNote.textContent = qualifies ? 'Includes free Scalp Cleansing Brush + free shipping' : '';
       }
 
       qs('[data-cart-increase]', body) && qs('[data-cart-increase]', body).addEventListener('click', function () { setQty(state.qty + 1); });
@@ -305,15 +316,17 @@
   qsa('[data-product-form]').forEach(function (form) {
     var atcBtn = qs('[data-add-to-cart]', form);
     var totalEl = qs('[data-tier-total]', form);
+    var perksEl = qs('[data-tier-perks]', form);
     var tierCards = qsa('.tier-card', form);
 
     function currentTier() {
       var checked = qs('input[name="qty-tier"]:checked', form);
-      return tierByQty(checked ? parseInt(checked.value, 10) : 1);
+      return tierByQty(checked ? parseInt(checked.value, 10) : 2);
     }
     function updateSelection() {
       var tier = currentTier();
       if (totalEl) totalEl.textContent = money(tier.total);
+      if (perksEl) perksEl.hidden = !(tier.freeBrush || tier.freeShipping);
       tierCards.forEach(function (card) {
         var input = qs('input[name="qty-tier"]', card);
         card.classList.toggle('is-selected', input.checked);
@@ -326,7 +339,7 @@
 
     if (atcBtn) atcBtn.addEventListener('click', function () {
       var tier = currentTier();
-      Cart.set(tier.qty, tier.unit);
+      Cart.set(tier.qty, tier.unit, tier.total);
       CartDrawer.open();
     });
 
@@ -351,8 +364,8 @@
     if (stickyBtn) stickyBtn.addEventListener('click', function () {
       var form = qs('[data-product-form]');
       var checked = form && qs('input[name="qty-tier"]:checked', form);
-      var tier = tierByQty(checked ? parseInt(checked.value, 10) : 1);
-      Cart.set(tier.qty, tier.unit);
+      var tier = tierByQty(checked ? parseInt(checked.value, 10) : 2);
+      Cart.set(tier.qty, tier.unit, tier.total);
       CartDrawer.open();
     });
   })();

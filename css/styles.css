@@ -549,6 +549,19 @@ summary:focus-visible,
 .formula__media{ aspect-ratio: 16 / 9; margin-top: var(--space-lg); }
 @media (min-width: 768px){ .formula__media{ aspect-ratio: 21 / 9; } }
 
+.brush__media{ aspect-ratio: 1 / 1; }
+.brush__media img{ object-position: center; }
+
+.media-caption{
+  margin-top: var(--space-sm);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
 /* ==========================================================================
    BOTTLE ICON (tiny monochrome mark, used only for the cart line item —
    real photography replaces it everywhere else)
@@ -644,6 +657,47 @@ summary:focus-visible,
 }
 @media (min-width: 1024px){
   .problem__layout{ grid-template-columns: 1.1fr 0.9fr; align-items: start; gap: var(--space-2xl); }
+}
+
+/* ==========================================================================
+   BRUSH / CLEAN ROUTINE OFFER
+   ========================================================================== */
+.brush__layout{
+  display: grid;
+  gap: var(--space-xl);
+}
+@media (min-width: 1024px){
+  .brush__layout{ grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: var(--space-2xl); }
+}
+
+.offer-panel{
+  margin-top: var(--space-xl);
+  padding-block: var(--space-lg);
+  border-top: var(--border-w) solid var(--color-border-dark);
+  border-bottom: var(--border-w) solid var(--color-border-dark);
+}
+.offer-panel__eyebrow{
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.offer-panel__title{
+  font-size: var(--fs-xl);
+  font-weight: 900;
+  letter-spacing: var(--ls-tight);
+  margin-top: var(--space-2xs);
+}
+.offer-panel__copy{
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  max-width: 46ch;
+}
+.offer-panel__perk{
+  margin-top: var(--space-sm);
+  font-weight: 700;
+  font-size: var(--fs-sm);
 }
 
 /* ==========================================================================
@@ -743,6 +797,14 @@ summary:focus-visible,
   font-weight: 500;
   margin-left: var(--space-2xs);
 }
+.product-card__value-note{
+  margin-top: var(--space-2xs);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
 
 .benefit-list{
   display: flex;
@@ -801,6 +863,7 @@ summary:focus-visible,
 }
 .tier-card input:checked ~ .tier-card__radio::after{ transform: scale(1); }
 .tier-card.is-selected{ border-color: var(--color-black); background: var(--color-bg-alt); }
+.tier-card--featured{ border-color: var(--color-black); }
 .tier-card__main{
   flex: 1;
   display: flex;
@@ -830,12 +893,12 @@ summary:focus-visible,
   font-size: var(--fs-xs);
   color: var(--color-text-muted);
 }
-.tier-card__save{
-  color: var(--color-accent);
-  font-weight: 600;
+.tier-card__perks{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
 }
-.tier-card__shipping{
-  display: block;
+.tier-card__perk{
   font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--color-accent);
@@ -864,6 +927,14 @@ summary:focus-visible,
 .tier-selected-total__price{
   font-size: var(--fs-xl);
   font-weight: 900;
+}
+
+.tier-selected-perks{
+  margin-top: var(--space-2xs);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-accent);
+  text-align: right;
 }
 
 .add-to-cart{ margin-top: var(--space-md); }
@@ -1062,6 +1133,31 @@ summary:focus-visible,
 .ingredient-full{
   margin-top: var(--space-lg);
   border-top: var(--border-w) solid var(--color-border-dark);
+}
+
+/* ==========================================================================
+   VALUE — cost-per-wash USP. Edit CONFIG.PRODUCT.washes in main.js if the
+   final production pump dispenses a different amount than ~1ml.
+   ========================================================================== */
+.value-stats{
+  margin-top: var(--space-2xl);
+  text-align: center;
+}
+.value-stat__top,
+.value-stat__bottom{
+  font-size: var(--fs-lg);
+  font-weight: 900;
+  letter-spacing: var(--ls-tight);
+}
+.value-stat__eq{
+  font-size: var(--fs-md);
+  color: var(--color-on-dark-muted);
+  margin-block: var(--space-2xs);
+}
+.value-footnote{
+  margin-top: var(--space-xl);
+  font-size: var(--fs-xs);
+  text-align: center;
 }
 
 /* ==========================================================================
