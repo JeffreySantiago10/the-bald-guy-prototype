@@ -422,11 +422,11 @@
        below (and the matching value-note in the PRODUCT section) if the
        confirmed dosage changes.
        ====================================================================== -->
-  <section class="section section--dark">
+  <section class="section section--dark value-section">
     <div class="container text-center" data-reveal>
       <span class="eyebrow" style="color:var(--color-on-dark-muted)">Cost Per Wash</span>
-      <h2 class="h2" style="margin-top:var(--space-sm)">One bottle.<br>Up to 200 washes.</h2>
-      <p class="lede" style="color:var(--color-on-dark-muted); margin-inline:auto; margin-top:var(--space-sm)">One pump. One daily wash.<br>A 200&nbsp;ml bottle can last more than six months.*</p>
+      <h2 class="h2 value-section__title">One bottle.<br>Up to 200 washes.</h2>
+      <p class="lede value-section__lede" style="color:var(--color-on-dark-muted); margin-inline:auto">One pump. One daily wash.<br>A 200&nbsp;ml bottle can last more than six months.*</p>
     </div>
 
     <div class="container grid grid--3 value-stats" data-reveal>
@@ -436,14 +436,21 @@
         <p class="value-stat__bottom">1 ml</p>
       </div>
       <div class="value-stat">
-        <p class="value-stat__top">200 ml</p>
-        <p class="value-stat__eq">&asymp;</p>
-        <p class="value-stat__bottom">200 washes</p>
+        <!-- Desktop keeps the existing calculation row unchanged.
+             Mobile swaps to a shorter restatement via CSS (<=600px) —
+             see .value-stat__mobile-only / .value-stat__desktop-only. -->
+        <p class="value-stat__top value-stat__desktop-only">200 ml</p>
+        <p class="value-stat__eq value-stat__desktop-only">&asymp;</p>
+        <p class="value-stat__bottom value-stat__desktop-only">200 washes</p>
+        <p class="value-stat__top value-stat__mobile-only">1 Bottle</p>
+        <p class="value-stat__sub value-stat__mobile-only">Up to 200 washes</p>
       </div>
-      <div class="value-stat">
-        <p class="value-stat__top">€24.95</p>
-        <p class="value-stat__eq">&asymp;</p>
-        <p class="value-stat__bottom">€0.12 / wash</p>
+      <div class="value-stat value-stat--hero">
+        <p class="value-stat__top value-stat__desktop-only">€24.95</p>
+        <p class="value-stat__eq value-stat__desktop-only">&asymp;</p>
+        <p class="value-stat__bottom value-stat__desktop-only">€0.12 / wash</p>
+        <p class="value-stat__top value-stat__mobile-only value-stat__top--hero">€0.12</p>
+        <p class="value-stat__sub value-stat__mobile-only">Per wash</p>
       </div>
     </div>
 

@@ -1191,6 +1191,10 @@ summary:focus-visible,
    VALUE — cost-per-wash USP. Edit CONFIG.PRODUCT.washes in main.js if the
    final production pump dispenses a different amount than ~1ml.
    ========================================================================== */
+.value-section__title,
+.value-section__lede{
+  margin-top: var(--space-sm);
+}
 .value-stats{
   margin-top: var(--space-2xl);
   text-align: center;
@@ -1210,6 +1214,83 @@ summary:focus-visible,
   margin-top: var(--space-xl);
   font-size: var(--fs-xs);
   text-align: center;
+}
+
+/* Mobile-only restatement of cards 2 & 3 (see markup comment above) —
+   hidden on tablet/desktop by default so the existing calculation rows
+   there are completely unaffected. */
+.value-stat__mobile-only{ display: none !important; }
+
+/* ==========================================================================
+   MOBILE REFINEMENT — Cost Per Wash section (<=600px only)
+   The three stacked calculation rows were taking up too much vertical
+   space on narrow screens. Below 600px this compresses them into a
+   2-up + 1 full-width card grid instead; desktop (>600px) keeps the
+   original three-row layout and copy completely untouched — everything
+   here lives inside this single media query.
+   ========================================================================== */
+@media (max-width: 600px){
+  .value-section{
+    padding-block: var(--space-lg);
+  }
+  .value-section__title,
+  .value-section__lede{
+    margin-top: var(--space-2xs);
+  }
+  .value-stats{
+    margin-top: var(--space-md);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2xs);
+  }
+  /* Plain block flow (not flex) on purpose: it lets the "≈" and the text
+     right after it merge onto one visual line as normal inline siblings —
+     flex items would each get blockified onto their own row regardless
+     of their own display value, which defeats that. */
+  .value-stat{
+    padding: var(--space-sm);
+    border: var(--border-w) solid var(--color-border-dark);
+    border-radius: var(--radius-md);
+  }
+  .value-stat--hero{
+    grid-column: 1 / -1;
+    padding-block: var(--space-sm);
+    border-color: var(--color-on-dark-muted);
+  }
+  .value-stat__top{
+    margin-bottom: 2px;
+    font-size: var(--fs-md);
+  }
+  .value-stat__top--hero{
+    font-size: var(--fs-2xl);
+  }
+  .value-stat__eq{
+    display: inline;
+    margin: 0 0.3em 0 0;
+    font-size: var(--fs-sm);
+  }
+  /* Only the text that directly follows the "≈" symbol (card 1) joins it
+     on one line; cards 2 & 3 use .value-stat__sub instead, which keeps
+     its own line below the headline number. */
+  .value-stat__eq + .value-stat__bottom{
+    display: inline;
+    font-size: var(--fs-sm);
+  }
+  .value-stat__sub{
+    margin-top: 2px;
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    color: var(--color-on-dark-muted);
+  }
+  .value-stat__mobile-only{ display: block !important; }
+  .value-stat__desktop-only{ display: none !important; }
+  .value-footnote{
+    margin-top: var(--space-sm);
+    max-width: 32ch;
+    margin-inline: auto;
+    font-size: 11px;
+  }
 }
 
 /* ==========================================================================
